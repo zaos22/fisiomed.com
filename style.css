@@ -1042,12 +1042,12 @@ button {
   }
 }
 
-/* ── El .container dentro del track hereda la altura completa del track ── */
+/* ── El .container dentro del track hereda la altura completa ── */
+/* Solo sobreescribimos height para que el sticky funcione;     */
+/* max-width y padding vienen del .container genérico →         */
+/* mismos márgenes que el resto de la web.                      */
 .method-scroll-track > .container {
   height: 100%;
-  /* Sobreescribe el max-width y padding del .container genérico para este contexto */
-  max-width: 100%;
-  padding: 0;
 }
 
 /* ── Layout Principal: Flex de 2 columnas, TODA la altura del track ── */
@@ -1056,19 +1056,7 @@ button {
   flex-direction: column;
   align-items: flex-start;
   height: 100%;
-  padding: 0 var(--space-24);
-}
-
-@media (min-width: 768px) {
-  .method-sticky-layout {
-    padding: 0 var(--space-48);
-  }
-}
-
-@media (min-width: 1200px) {
-  .method-sticky-layout {
-    padding: 0 var(--space-64);
-  }
+  /* Sin padding propio: lo gestiona el .container padre */
 }
 
 /* En escritorio, el layout es una fila y el track se convierte en el scroll container */
@@ -1076,10 +1064,9 @@ button {
   .method-sticky-layout {
     flex-direction: row;
     gap: 0;
-    /* align-items: stretch (default) permite que .method-sticky-col se extienda  */
-    /* al 100% de la altura del track (300vh), dando espacio para el scroll sticky */
+    /* align-items: stretch permite que .method-sticky-col se extienda al 100% */
+    /* de la altura del track (300vh), dando espacio para el scroll sticky      */
     align-items: stretch;
-    padding: 0 var(--space-64);
   }
 }
 
