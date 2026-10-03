@@ -836,15 +836,24 @@
             </div>
 
             <!-- Tarjeta de Mapa / Cómo Llegar -->
-            <a href="https://maps.google.com/?q=Carrer+d'Alcala+de+Xivert+110+Benicarlo" target="_blank" rel="noopener noreferrer" class="location-map-card" aria-label="Abrir ubicación en Google Maps">
-              <div class="map-card-badge">
+            <div class="location-map-container" style="margin-top: 24px; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.06); border: 1px solid var(--color-border-subtle);">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3012.35515730303!2d0.4217144766861118!3d40.423164971439285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a014972f3d6ce7%3A0x6291689bb51f22d5!2sCarrer%20d&#39;Alcal%C3%A0%20de%20Xivert%2C%20110%2C%2012580%20Benicarl%C3%B3%2C%20Castell%C3%B3n!5e0!3m2!1ses!2ses!4v1714041042784!5m2!1ses!2ses" 
+                width="100%" 
+                height="280" 
+                style="border:0; display: block;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+              <a href="https://maps.google.com/?q=Carrer+d'Alcala+de+Xivert+110+Benicarlo" target="_blank" rel="noopener noreferrer" class="map-card-badge" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background-color: var(--color-surface-container); text-decoration: none; color: inherit; font-size: 0.875rem;">
                 <div style="display: flex; align-items: center; gap: 8px;">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                  <span>Fácil aparcamiento en la zona</span>
+                  <span style="font-weight: 500;">Fácil aparcamiento en la zona</span>
                 </div>
-                <span style="color: var(--color-secondary);">Abrir mapa →</span>
-              </div>
-            </a>
+                <span style="color: var(--color-secondary); font-weight: 600;">Abrir mapa →</span>
+              </a>
+            </div>
 
           </div>
 
