@@ -2097,3 +2097,45 @@ button {
     display: none !important;
   }
 }
+
+/* ==========================================================================
+   ANIMACIONES DE SCROLL (FADE UP / FADE IN)
+   ========================================================================== */
+
+/* Estado inicial de los elementos que se van a animar */
+[data-animate] {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+[data-animate="fade-up"] {
+  transform: translateY(30px);
+}
+
+[data-animate="fade-in"] {
+  transform: translateY(0);
+}
+
+[data-animate="fade-left"] {
+  transform: translateX(30px);
+}
+
+[data-animate="fade-right"] {
+  transform: translateX(-30px);
+}
+
+/* Estado activo cuando entran en el viewport */
+[data-animate].is-visible {
+  opacity: 1;
+  transform: translate(0, 0);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Respetar prefers-reduced-motion según las reglas del usuario */
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

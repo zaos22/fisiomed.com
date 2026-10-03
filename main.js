@@ -53,6 +53,9 @@ class FisiomedApp {
     // 6. Enlaces de Navegación Suave y Resaltado Activo
     this.initNavigation();
 
+    // 7. Animaciones de scroll para elementos
+    this.initScrollAnimations();
+
     // Recalcular posiciones de ScrollTrigger tras montar el DOM y las alturas dinámicas
     requestAnimationFrame(() => {
       ScrollTrigger.refresh();
@@ -162,6 +165,42 @@ class FisiomedApp {
         });
       }
     }, { passive: true });
+  }
+
+  initScrollAnimations() {
+    if (this.isReducedMotion) {
+      // Si el usuario prefiere movimiento reducido, mostramos todo directamente
+      document.querySelectorAll('[data-animate]').forEach(el => {
+        el.classList.add('is-visible');
+      });
+      return;
+    }
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -10% 0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          
+          // Añadir retraso si el elemento tiene data-delay
+          const delay = entry.target.getAttribute('data-delay');
+          if (delay) {
+            entry.target.style.transitionDelay = `${delay}ms`;
+          }
+          
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('[data-animate]').forEach(el => {
+      observer.observe(el);
+    });
   }
 }
 
