@@ -12,6 +12,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import { HeroCanvasController } from './hero-controller.js';
+import { MethodController } from './method-controller.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,19 +29,37 @@ class FisiomedApp {
     // 2. Controlador del Hero Canvas
     this.heroController = new HeroCanvasController({
       canvasId: 'hero-canvas',
-      scrollHeightDesktop: '300vh',
-      scrollHeightMobile: '250vh',
+      scrollHeightDesktop: '380vh',
+      scrollHeightMobile: '320vh',
       scrubSmoothing: 0.8
     });
 
-    // 3. Menú Móvil
+    // 3. Controlador del Escenario Sticky Nuestro Método (50 frames /our_method)
+    this.methodController = new MethodController({
+      sectionId: 'metodo',
+      canvasId: 'method-canvas',
+      scrollHeightDesktop: '300vh',
+      scrollHeightTablet: '260vh',
+      scrollHeightMobile: '220vh',
+      scrubSmoothing: 0.7
+    });
+
+    // 4. Menú Móvil
     this.initMobileMenu();
 
-    // 4. Formulario de Reserva
+    // 5. Formulario de Reserva
     this.initBookingForm();
 
-    // 5. Enlaces de Navegación Suave y Resaltado Activo
+    // 6. Enlaces de Navegación Suave y Resaltado Activo
     this.initNavigation();
+
+    // Recalcular posiciones de ScrollTrigger tras montar el DOM y las alturas dinámicas
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+    });
+    window.addEventListener('load', () => {
+      ScrollTrigger.refresh();
+    });
   }
 
   initLenis() {

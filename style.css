@@ -89,7 +89,15 @@
   --radius-md: 8px;
   --radius-lg: 16px;
   --radius-xl: 24px;
+  --radius-2xl: 32px;
   --radius-full: 9999px;
+
+  /* Layout y Componentes */
+  --header-height: 80px;
+  --space-10: 10px;
+  --space-20: 20px;
+  --space-28: 28px;
+  --space-36: 36px;
 
   /* Transición estándar */
   --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -117,7 +125,8 @@ html {
 body {
   background-color: var(--color-surface);
   color: var(--color-on-surface);
-  overflow-x: hidden;
+  /* clip no crea un scroll container (a diferencia de hidden), preservando position:sticky */
+  overflow-x: clip;
   line-height: 1.6;
   min-height: 100vh;
   position: relative;
@@ -657,7 +666,7 @@ button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  will-change: opacity, transform;
 }
 
 .hero-stage-1 {
@@ -986,10 +995,11 @@ button {
 }
 
 /* ==========================================================================
-   4. MÉTODO EN 3 PASOS
+   4. MÉTODO EN 3 PASOS (ESCENARIO STICKY DIVIDIDO CON CANVAS)
    ========================================================================== */
 .method-section {
   background-color: var(--color-surface-container-low);
+  position: relative;
 }
 
 .section-header-center {
@@ -997,95 +1007,502 @@ button {
   max-width: 680px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: var(--space-56);
+  margin-bottom: var(--space-48);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-16);
 }
 
-.method-timeline-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-32);
+/* ── Scroll Track: el contenedor que "contiene" todo el scroll de la sección ── */
+/* Su altura define el total de recorrido de scroll disponible para el sticky.   */
+/* Se ajusta en una sola constante. ──────────────────────────────────────────── */
+.method-scroll-track {
+  width: 100%;
   position: relative;
+  /* ▼ AJUSTE PRINCIPAL: recorrido de scroll disponible */
+  --method-scroll-height: 300vh;
+  --method-scroll-height-tablet: 260vh;
+  --method-scroll-height-mobile: 220vh;
+  min-height: var(--method-scroll-height);
+  height: var(--method-scroll-height);
 }
 
-@media (min-width: 768px) {
-  .method-timeline-grid {
-    grid-template-columns: repeat(3, 1fr);
+@media (min-width: 768px) and (max-width: 1023px) {
+  .method-scroll-track {
+    min-height: var(--method-scroll-height-tablet);
+    height: var(--method-scroll-height-tablet);
   }
 }
 
-.method-step-card {
-  padding: var(--space-40) var(--space-32);
+@media (max-width: 767px) {
+  .method-scroll-track {
+    min-height: var(--method-scroll-height-mobile);
+    height: var(--method-scroll-height-mobile);
+  }
+}
+
+/* ── El .container dentro del track hereda la altura completa del track ── */
+.method-scroll-track > .container {
+  height: 100%;
+  /* Sobreescribe el max-width y padding del .container genérico para este contexto */
+  max-width: 100%;
+  padding: 0;
+}
+
+/* ── Layout Principal: Flex de 2 columnas, TODA la altura del track ── */
+.method-sticky-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+  padding: 0 var(--space-24);
+}
+
+@media (min-width: 768px) {
+  .method-sticky-layout {
+    padding: 0 var(--space-48);
+  }
+}
+
+@media (min-width: 1200px) {
+  .method-sticky-layout {
+    padding: 0 var(--space-64);
+  }
+}
+
+/* En escritorio, el layout es una fila y el track se convierte en el scroll container */
+@media (min-width: 1024px) {
+  .method-sticky-layout {
+    flex-direction: row;
+    gap: 0;
+    /* align-items: stretch (default) permite que .method-sticky-col se extienda  */
+    /* al 100% de la altura del track (300vh), dando espacio para el scroll sticky */
+    align-items: stretch;
+    padding: 0 var(--space-64);
+  }
+}
+
+/* ── Columna Izquierda (Canvas sticky) ── */
+/* align-self:stretch le da la altura completa del flex-row al contenedor, */
+/* lo que permite que el .method-viewport-wrapper interno haga sticky      */
+/* correctamente a lo largo de todo el recorrido de scroll del track.      */
+.method-sticky-col {
+  width: 100%;
+  align-self: stretch;
+}
+
+@media (min-width: 1024px) {
+  .method-sticky-col {
+    width: 52%;
+    flex-shrink: 0;
+    padding-right: var(--space-48);
+  }
+}
+
+/* El wrapper que hace sticky al visor */
+.method-viewport-wrapper {
+  position: -webkit-sticky;
+  position: sticky;
+  top: calc(var(--header-height) + var(--space-24));
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .method-viewport-wrapper {
+    /* Centrado verticalmente en el viewport respetando la altura del header */
+    top: calc(var(--header-height) + max(var(--space-24), (100vh - var(--header-height) - 440px) / 2));
+  }
+}
+
+/* ── Marco del Visor: borde dorado, sombra cálida ── */
+.method-viewport-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  background-color: var(--color-surface-container);
+  border: 1px solid rgba(217, 178, 111, 0.45);
+  box-shadow:
+    0 24px 48px -12px rgba(43, 40, 36, 0.12),
+    0 0 32px -4px rgba(217, 178, 111, 0.18);
+  isolation: isolate;
+}
+
+/* Tablet (768px - 1023px): visor más compacto proporción 4:3 */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .method-viewport-frame {
+    aspect-ratio: 4 / 3;
+    max-height: 48vh;
+    border-radius: var(--radius-xl);
+  }
+}
+
+@media (max-width: 767px) {
+  .method-viewport-wrapper {
+    top: calc(var(--header-height) + var(--space-8));
+  }
+  .method-viewport-frame {
+    aspect-ratio: 16 / 9;
+    max-height: 44dvh;
+    border-radius: var(--radius-xl);
+  }
+}
+
+/* Canvas de renderizado */
+#method-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 2;
+}
+
+/* Placeholder elegante mientras carga */
+.method-canvas-placeholder {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, #FAF7F0 0%, #F5EFEB 100%);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+.method-placeholder-spinner {
+  width: 32px;
+  height: 32px;
+  border: 2px solid rgba(217, 178, 111, 0.25);
+  border-top-color: var(--color-secondary-gold);
+  border-radius: var(--radius-full);
+  animation: methodSpin 1s linear infinite;
+}
+
+@keyframes methodSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* Sutil halo cálido perimetral */
+.method-viewport-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  box-shadow: inset 0 0 40px rgba(255, 254, 251, 0.35);
+}
+
+/* Etiqueta flotante Glassmorphic encima del visor */
+.method-sticky-badge {
+  position: absolute;
+  top: var(--space-16);
+  left: var(--space-16);
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding: 6px var(--space-16);
+  border-radius: var(--radius-full);
+  background: rgba(255, 254, 251, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(217, 178, 111, 0.5);
+  box-shadow: 0 4px 16px rgba(43, 40, 36, 0.08);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.method-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-secondary-gold);
+}
+
+/* ── Columna Derecha: Indicador de Progreso y Bloques de Fases ── */
+.method-content-col {
+  flex: 1;
+  display: flex;
+  gap: var(--space-16);
+  padding-top: var(--space-16);
+}
+
+@media (min-width: 1024px) {
+  .method-content-col {
+    gap: var(--space-24);
+    padding-top: 0;
+  }
+}
+
+/* Riel de progreso vertical sticky */
+.method-progress-rail {
+  position: -webkit-sticky;
+  position: sticky;
+  top: calc(var(--header-height) + var(--space-32));
+  flex-shrink: 0;
+  width: 44px;
+  /* Altura del riel = viewport - header - margen inferior */
+  height: calc(100svh - var(--header-height) - 64px);
+  max-height: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 15;
+  align-self: flex-start;
+}
+
+@media (max-width: 767px) {
+  .method-progress-rail {
+    width: 44px;
+    height: calc(100svh - var(--header-height) - 48dvh - 48px);
+    max-height: 200px;
+    top: calc(var(--header-height) + 44dvh + 12px);
+  }
+}
+
+.method-progress-track-line {
+  position: absolute;
+  top: 22px;
+  bottom: 22px;
+  width: 2px;
+  background-color: rgba(217, 178, 111, 0.25);
+  border-radius: var(--radius-full);
+  z-index: 1;
+}
+
+.method-progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: linear-gradient(180deg, var(--color-secondary-gold), #B88E4B);
+  border-radius: var(--radius-full);
+  transition: height 0.08s linear;
+}
+
+.method-progress-nodes {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Touch target mínimo accesible de 44x44px */
+.method-progress-node {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-surface);
+  border: 1.5px solid rgba(217, 178, 111, 0.4);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(43, 40, 36, 0.06);
+  transition: all var(--transition-fast);
+}
+
+@media (max-width: 767px) {
+  .method-progress-node {
+    width: 44px;
+    height: 44px;
+    font-size: 0.75rem;
+  }
+}
+
+.method-progress-node:hover,
+.method-progress-node:focus-visible {
+  border-color: var(--color-secondary-gold);
+  color: var(--color-primary);
+  transform: scale(1.08);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(217, 178, 111, 0.25);
+}
+
+.method-progress-node.active {
+  background-color: var(--color-secondary-gold);
+  border-color: var(--color-secondary-gold);
+  color: #FFFFFF;
+  box-shadow: 0 0 16px rgba(217, 178, 111, 0.5);
+}
+
+/* Contenedor de Bloques de Fases */
+.method-steps-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Bloque de Fase: cada uno ocupa ~80-100vh para un scroll rítmico ── */
+.method-step-block {
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-16) 0;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+@media (max-width: 767px) {
+  .method-step-block {
+    min-height: 60vh;
+    padding: var(--space-8) 0;
+  }
+}
+
+.method-step-inner {
+  padding: var(--space-40) var(--space-36);
   border-radius: var(--radius-xl);
-  background-color: var(--color-surface-container-lowest);
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border-subtle);
   box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
-  transition: transform var(--transition-base);
+  gap: var(--space-20);
+  transition: box-shadow var(--transition-base), border-color var(--transition-base);
 }
 
-.method-step-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-card);
+@media (max-width: 767px) {
+  .method-step-inner {
+    padding: var(--space-24) var(--space-20);
+    background: rgba(255, 254, 251, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
 }
 
-.step-num-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--space-24);
+/* Estado Activo vs Inactivo */
+.method-step-block.is-active {
+  opacity: 1;
+  transform: scale(1.02) translateX(4px);
 }
 
-.step-big-number {
+.method-step-block.is-active .method-step-inner {
+  border-color: rgba(217, 178, 111, 0.6);
+  box-shadow:
+    0 16px 36px -8px rgba(43, 40, 36, 0.08),
+    0 0 24px -4px rgba(217, 178, 111, 0.15);
+}
+
+.method-step-block.is-dimmed {
+  opacity: 0.35;
+  transform: scale(0.98) translateX(0px);
+}
+
+/* Imagen representativa para fallback de prefers-reduced-motion (oculta por defecto) */
+.method-step-reduced-img {
+  display: none;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-gold-hairline);
+  margin-top: var(--space-12);
+}
+
+/* Tipografía de bloque */
+.step-serif-number {
   font-family: var(--font-serif);
-  font-size: 3rem;
+  font-size: clamp(2rem, 3vw, 2.75rem);
   line-height: 1;
   color: var(--color-secondary-gold);
   font-weight: 300;
+  display: block;
 }
 
-.step-icon-bubble {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-full);
-  background-color: var(--color-secondary-fixed);
-  color: var(--color-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.25rem;
+.step-block-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  color: var(--color-primary);
+  font-weight: 400;
+  line-height: 1.25;
 }
 
-.step-card-title {
-  margin-bottom: var(--space-16);
-}
-
-.step-card-desc {
+.step-block-desc {
   font-size: 0.9375rem;
-  line-height: 1.65;
-  flex: 1;
+  line-height: 1.7;
+  color: var(--color-text-muted);
 }
 
-.step-card-footer {
-  margin-top: var(--space-24);
+.step-block-benefit {
+  margin-top: var(--space-8);
   padding-top: var(--space-16);
   border-top: 1px solid var(--color-surface-container-highest);
   display: flex;
   align-items: center;
-  gap: var(--space-8);
-  font-size: 0.75rem;
-  color: var(--color-on-surface-variant);
+  gap: var(--space-10);
+  font-size: 0.8125rem;
   font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-primary);
 }
 
-.step-card-footer .check-icon {
+.benefit-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  background-color: var(--color-secondary-fixed);
   color: var(--color-secondary);
-  font-size: 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
 }
+
+/* ── Fallback prefers-reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .method-scroll-track {
+    --method-scroll-height: auto !important;
+  }
+  .method-sticky-col {
+    display: none !important;
+  }
+  .method-viewport-wrapper {
+    display: none !important;
+  }
+  .method-progress-rail {
+    display: none !important;
+  }
+  .method-step-block {
+    min-height: auto !important;
+    opacity: 1 !important;
+    transform: none !important;
+    padding-bottom: var(--space-32);
+  }
+  .method-step-reduced-img {
+    display: block !important;
+  }
+  .method-placeholder-spinner {
+    animation: none !important;
+  }
+}
+
+
 
 /* ==========================================================================
    5. ESPACIO E HIGIENE

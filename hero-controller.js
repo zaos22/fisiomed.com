@@ -30,8 +30,8 @@ export class HeroCanvasController {
       totalFrames: 80,
       framePattern: (i) => `/hero/Camera_moving_toward_treatment_bed_20261003132308_${String(i).padStart(3, '0')}.jpg`,
       minFramesForStart: 12,      // Muestra la web antes de cargar el 100%
-      scrollHeightDesktop: '300vh',
-      scrollHeightMobile: '250vh',
+      scrollHeightDesktop: '380vh',
+      scrollHeightMobile: '320vh',
       scrubSmoothing: 0.8,
       ...options
     };
@@ -229,7 +229,7 @@ export class HeroCanvasController {
       }
     });
 
-    // ── B) Texto Stage 1: Scroll cue desvanece al 8% ──────────────────────
+    // ── B) Texto Stage 1: Scroll cue desvanece pronto (0% → 6%) ───────────
     if (scrollCue) {
       gsap.to(scrollCue, {
         opacity: 0,
@@ -237,73 +237,101 @@ export class HeroCanvasController {
         scrollTrigger: {
           trigger: scrollContainer,
           start: 'top top',
-          end: '8% top',
+          end: '6% top',
           scrub: true,
         }
       });
     }
 
-    // Stage 1 sale (25% → 33%)
+    // Stage 1 visible al inicio; permanece hasta el 18% y sale suavemente hacia el 26%
     if (stage1) {
       gsap.to(stage1, {
         opacity: 0,
-        y: -28,
+        y: -30,
         ease: 'power2.in',
         scrollTrigger: {
           trigger: scrollContainer,
-          start: '25% top',
-          end: '34% top',
+          start: '18% top',
+          end: '27% top',
           scrub: true,
+          onUpdate: (self) => {
+            stage1.style.pointerEvents = self.progress >= 0.9 ? 'none' : 'auto';
+          }
         }
       });
     }
 
-    // Stage 2 entra (34% → 44%)
+    // Stage 2 entra (28% → 36%), permanece visible (36% → 52%) y sale (52% → 60%)
     if (stage2) {
       gsap.fromTo(stage2,
-        { opacity: 0, y: 24 },
+        { opacity: 0, y: 30 },
         {
           opacity: 1,
           y: 0,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: scrollContainer,
-            start: '34% top',
-            end: '44% top',
+            start: '28% top',
+            end: '36% top',
             scrub: true,
+            onUpdate: (self) => {
+              if (self.progress > 0.1) stage2.style.pointerEvents = 'auto';
+            }
           }
         }
       );
-      // Stage 2 sale (62% → 70%)
+
       gsap.to(stage2, {
         opacity: 0,
-        y: -28,
+        y: -30,
         ease: 'power2.in',
         scrollTrigger: {
           trigger: scrollContainer,
-          start: '62% top',
-          end: '70% top',
+          start: '52% top',
+          end: '60% top',
           scrub: true,
+          onUpdate: (self) => {
+            if (self.progress >= 0.9) stage2.style.pointerEvents = 'none';
+          }
         }
       });
     }
 
-    // Stage 3 entra (72% → 82%)
+    // Stage 3 entra anticipadamente (62% → 70%), permanece en pantalla con máxima visibilidad (70% → 90%)
+    // y desvanece suavemente al final (90% → 98%) para entregar el paso armónico a la sección de Tratamientos
     if (stage3) {
       gsap.fromTo(stage3,
-        { opacity: 0, y: 24 },
+        { opacity: 0, y: 30 },
         {
           opacity: 1,
           y: 0,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: scrollContainer,
-            start: '72% top',
-            end: '82% top',
+            start: '62% top',
+            end: '70% top',
             scrub: true,
+            onUpdate: (self) => {
+              if (self.progress > 0.1) stage3.style.pointerEvents = 'auto';
+            }
           }
         }
       );
+
+      gsap.to(stage3, {
+        opacity: 0,
+        y: -25,
+        ease: 'power2.in',
+        scrollTrigger: {
+          trigger: scrollContainer,
+          start: '90% top',
+          end: '98% top',
+          scrub: true,
+          onUpdate: (self) => {
+            if (self.progress >= 0.8) stage3.style.pointerEvents = 'none';
+          }
+        }
+      });
     }
   }
 
