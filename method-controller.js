@@ -188,11 +188,13 @@ export class MethodController {
             this.progressFill.style.height = `${Math.min(progress * 100, 100)}%`;
           }
 
-          // 3. Determinar fase activa (0, 1 o 2)
-          let activePhaseIdx = 0;
-          if (progress >= 0.33 && progress < 0.66) {
+          // 3. Determinar fase activa (0, 1 o 2) o -1 si ya pasó
+          let activePhaseIdx = -1;
+          if (progress >= 0.0 && progress < 0.33) {
+            activePhaseIdx = 0;
+          } else if (progress >= 0.33 && progress < 0.66) {
             activePhaseIdx = 1;
-          } else if (progress >= 0.66) {
+          } else if (progress >= 0.66 && progress < 0.99) {
             activePhaseIdx = 2;
           }
 
@@ -218,6 +220,8 @@ export class MethodController {
         this.badgeEl.style.opacity = '1';
         this.badgeEl.style.transform = 'translateY(0)';
       }, 180);
+    } else if (this.badgeEl) {
+      this.badgeEl.style.opacity = '0';
     }
 
     // Actualizar nodos de progreso

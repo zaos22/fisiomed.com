@@ -116,6 +116,7 @@ html {
   font-family: var(--font-sans);
   font-size: 16px;
   scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + var(--space-24));
   background-color: var(--color-surface);
   color: var(--color-on-surface);
   -webkit-font-smoothing: antialiased;
@@ -158,6 +159,7 @@ h3 {
 p {
   color: var(--color-on-surface-variant);
   font-size: clamp(0.95rem, 0.4vw + 0.85rem, 1.05rem);
+  overflow-wrap: break-word;
 }
 
 a {
@@ -369,7 +371,7 @@ button {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 1100;
   height: 80px;
   transition: background-color var(--transition-base), box-shadow var(--transition-base), backdrop-filter var(--transition-base), border-color var(--transition-base);
   border-bottom: 1px solid transparent;
@@ -432,6 +434,13 @@ button {
   letter-spacing: 0.16em;
   color: var(--color-secondary);
   font-weight: 600;
+  display: none;
+}
+
+@media (min-width: 480px) {
+  .brand-tagline {
+    display: block;
+  }
 }
 
 .nav-desktop {
@@ -497,6 +506,32 @@ button {
 
 .phone-direct:hover {
   color: var(--color-secondary);
+}
+
+/* Header CTA Compact Mobile */
+#header-cta-btn {
+  white-space: nowrap;
+  padding: 8px 16px;
+  min-height: 40px;
+  font-size: 0.75rem;
+}
+
+#header-cta-btn .desktop-text {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  #header-cta-btn {
+    padding: var(--space-16) var(--space-32);
+    min-height: 48px;
+    font-size: 0.8125rem;
+  }
+  #header-cta-btn .desktop-text {
+    display: inline;
+  }
+  #header-cta-btn .mobile-text {
+    display: none;
+  }
 }
 
 /* Botón Hamburguesa */
@@ -602,6 +637,7 @@ button {
   width: 100%;
   height: 100vh;
   height: 100dvh;
+  min-height: 100svh;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -632,7 +668,7 @@ button {
 @media (max-width: 768px) {
   .hero-scrim {
     background: 
-      linear-gradient(180deg, rgba(252, 249, 242, 0.88) 0%, rgba(252, 249, 242, 0.75) 55%, rgba(252, 249, 242, 0.95) 100%);
+      linear-gradient(180deg, rgba(252, 249, 242, 0.95) 0%, rgba(252, 249, 242, 0.85) 55%, rgba(252, 249, 242, 0.98) 100%);
   }
 }
 
@@ -1050,13 +1086,20 @@ button {
   height: 100%;
 }
 
-/* ── Layout Principal: Flex de 2 columnas, TODA la altura del track ── */
+/* ── Layout Principal: Flex de 2 columnas en desktop, Block en móvil ── */
 .method-sticky-layout {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  position: relative;
+  display: block;
   height: 100%;
-  /* Sin padding propio: lo gestiona el .container padre */
+}
+
+@media (min-width: 1024px) {
+  .method-sticky-layout {
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    align-items: stretch;
+  }
 }
 
 /* En escritorio, el layout es una fila y el track se convierte en el scroll container */
@@ -1070,13 +1113,29 @@ button {
   }
 }
 
-/* ── Columna Izquierda (Canvas sticky) ── */
-/* align-self:stretch le da la altura completa del flex-row al contenedor, */
-/* lo que permite que el .method-viewport-wrapper interno haga sticky      */
-/* correctamente a lo largo de todo el recorrido de scroll del track.      */
+/* En móvil, la columna sticky debe ocupar el alto total para que el visor sea sticky,
+   mientras el texto fluye por encima. */
 .method-sticky-col {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  align-self: stretch;
+  height: 100%;
+  pointer-events: none;
+}
+.method-sticky-col * {
+  pointer-events: auto;
+}
+
+@media (min-width: 1024px) {
+  .method-sticky-col {
+    position: relative;
+    height: auto;
+    width: 52%;
+    flex-shrink: 0;
+    align-self: stretch;
+    padding-right: var(--space-48);
+  }
 }
 
 @media (min-width: 1024px) {
@@ -1218,8 +1277,10 @@ button {
 .method-content-col {
   flex: 1;
   display: flex;
+  position: relative;
+  z-index: 5;
   gap: var(--space-16);
-  padding-top: var(--space-16);
+  padding-top: calc(48dvh + var(--header-height));
 }
 
 @media (min-width: 1024px) {
@@ -1810,7 +1871,7 @@ button {
   border: 1px solid var(--color-border-subtle);
   background-color: var(--color-surface);
   font-family: var(--font-sans);
-  font-size: 0.9375rem;
+  font-size: 16px; /* 16px prevents iOS zoom on focus */
   color: var(--color-on-surface);
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
@@ -2020,7 +2081,7 @@ button {
 /* Botón flotante de WhatsApp */
 .floating-whatsapp-widget {
   position: fixed;
-  bottom: var(--space-24);
+  bottom: calc(var(--space-24) + env(safe-area-inset-bottom, 0px));
   right: var(--space-24);
   z-index: 900;
   display: flex;
