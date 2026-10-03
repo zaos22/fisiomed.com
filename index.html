@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="FISIOMED: Clínica de fisioterapia avanzada en Benicarló (Castellón). Especialistas en fisioterapia manual, rehabilitación postoperatoria, lesiones deportivas y cuidado espinal en un santuario cálido y exclusivo.">
+  <meta name="keywords" content="fisioterapia Benicarló, clínica fisioterapia, osteopatía Benicarló, rehabilitación deportiva, dolor de espalda, fisioterapeuta colegiado">
+  <meta name="author" content="FISIOMED Benicarló">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Meta Compartir -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fisiomed.com/">
+  <meta property="og:title" content="FISIOMED | Clínica de Fisioterapia en Benicarló">
+  <meta property="og:description" content="Recupera tu movimiento y bienestar en un espacio íntimo, luminoso y cuidado hasta el último detalle en la Costa del Azahar.">
+  <meta property="og:image" content="/images/mediterranean-suite.png">
+
+  <!-- Favicon y Fuentes Google (Playfair Display & Manrope) -->
+  <link rel="icon" type="image/png" href="/images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  
+  <title>FISIOMED | Clínica de Fisioterapia en Benicarló</title>
+  <link rel="stylesheet" href="./style.css">
+
+  <!-- Schema.org JSON-LD para SEO Local -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Physiotherapy",
+    "name": "FISIOMED - Fisioterapia en Benicarló",
+    "image": "https://fisiomed.com/images/mediterranean-suite.png",
+    "logo": "https://fisiomed.com/images/logo.png",
+    "url": "https://fisiomed.com",
+    "telephone": "+34964472623",
+    "priceRange": "€€",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Carrer d'Alcalà de Xivert, 110, bajo",
+      "addressLocality": "Benicarló",
+      "addressRegion": "Castellón",
+      "postalCode": "12580",
+      "addressCountry": "ES"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 40.418,
+      "longitude": 0.427
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "13:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "15:00",
+        "closes": "20:00"
+      }
+    ],
+    "sameAs": [
+      "https://instagram.com/fisiomed_blo"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Preloader Minimalista y Elegante -->
+  <div id="hero-preloader" aria-live="polite" role="status">
+    <div class="preloader-brand">
+      <img src="/images/logo.png" alt="FISIOMED Logo" class="preloader-logo">
+      <span class="preloader-title">FISIOMED</span>
+    </div>
+    <div class="preloader-progress-track">
+      <div class="preloader-progress-bar" id="preloader-progress-bar"></div>
+    </div>
+    <span class="preloader-status" id="preloader-status">Iniciando santuario...</span>
+  </div>
+
+  <!-- 1. Encabezado / Navbar -->
+  <header class="site-header" id="main-header">
+    <div class="container header-container">
+      <a href="#hero" class="brand-link" aria-label="FISIOMED - Volver al inicio">
+        <img src="/images/logo.png" alt="Logo de FISIOMED" class="brand-logo-img">
+        <div class="brand-meta">
+          <span class="brand-name">FISIOMED<span class="brand-dot"></span></span>
+          <span class="brand-tagline">Fisioterapia en Benicarló</span>
+        </div>
+      </a>
+
+      <!-- Navegación Escritorio -->
+      <nav class="nav-desktop" aria-label="Navegación principal">
+        <a href="#hero" class="nav-link active">Inicio</a>
+        <a href="#tratamientos" class="nav-link">Tratamientos</a>
+        <a href="#metodo" class="nav-link">Método</a>
+        <a href="#espacio" class="nav-link">Espacio</a>
+        <a href="#equipo" class="nav-link">Equipo</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
+      </nav>
+
+      <!-- Acciones de Cabecera -->
+      <div class="header-actions">
+        <a href="tel:964472623" class="phone-direct" aria-label="Llamar a la clínica al 964 47 26 23">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          <span>964 47 26 23</span>
+        </a>
+        <a href="#reservar" class="btn btn-gold" id="header-cta-btn">Reservar cita</a>
+        
+        <!-- Toggle Hamburguesa Móvil -->
+        <button class="menu-toggle-btn" id="menu-toggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+          <span class="menu-toggle-line"></span>
+          <span class="menu-toggle-line"></span>
+          <span class="menu-toggle-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Cajón de Menú Móvil -->
+  <div class="mobile-nav-drawer" id="mobile-drawer" aria-hidden="true">
+    <a href="#hero" class="mobile-nav-link">Inicio</a>
+    <a href="#tratamientos" class="mobile-nav-link">Tratamientos</a>
+    <a href="#metodo" class="mobile-nav-link">Método</a>
+    <a href="#espacio" class="mobile-nav-link">Espacio</a>
+    <a href="#equipo" class="mobile-nav-link">Equipo</a>
+    <a href="#contacto" class="mobile-nav-link">Contacto</a>
+    <div style="margin-top: 16px; display: flex; flex-direction: column; align-items: center; gap: 16px;">
+      <a href="tel:964472623" class="btn btn-secondary">Llamar: 964 47 26 23</a>
+      <a href="#reservar" class="btn btn-primary" id="mobile-cta-btn">Reservar valoración</a>
+    </div>
+  </div>
+
+  <main>
+    <!-- HERO SECTION CON SECUENCIA DE FRAMES POR SCROLL -->
+    <section class="hero-scroll-container" id="hero" aria-label="Presentación interactiva FISIOMED">
+      <div class="hero-pinned-viewport">
+        <!-- Canvas que dibuja los 80 frames progresivos -->
+        <canvas id="hero-canvas" aria-label="Secuencia visual de la suite de fisioterapia de FISIOMED"></canvas>
+        
+        <!-- Degradado de contraste y transición fluida -->
+        <div class="hero-scrim"></div>
+
+        <!-- Capa de contenidos sincronizados con el scroll -->
+        <div class="hero-content-layer">
+          <div class="container">
+            
+            <!-- Etapa 1: Apertura inicial (0% - 30%) -->
+            <div class="hero-stage hero-stage-1">
+              <div class="chip">
+                <span class="chip-dot"></span>
+                <span>Fisioterapia Avanzada • Benicarló</span>
+              </div>
+              <h1 class="hero-title">
+                Recupera tu movimiento. <br>
+                Recupera tu <span class="accent-italic">bienestar.</span>
+              </h1>
+              <p class="hero-description">
+                Fisioterapia personalizada en un espacio íntimo, luminoso y cuidado hasta el último detalle en la Costa del Azahar. Medicina del movimiento con calidez mediterránea.
+              </p>
+              <div class="hero-actions-cluster">
+                <a href="#reservar" class="btn btn-primary">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  <span>Reservar valoración</span>
+                </a>
+                <a href="#tratamientos" class="btn btn-secondary">Descubrir tratamientos</a>
+              </div>
+              <div class="hero-credentials-pill">
+                <div class="credentials-icon">✓</div>
+                <span>Más de 8 años cuidando de tu salud • Centro Autorizado CS-12493</span>
+              </div>
+            </div>
+
+            <!-- Etapa 2: Mensaje Intermedio (35% - 65%) -->
+            <div class="hero-stage hero-stage-2">
+              <div class="chip">
+                <span class="chip-dot"></span>
+                <span>Rigor Clínico & Privacidad</span>
+              </div>
+              <h2 class="hero-title">
+                El cuerpo responde cuando el entorno <span class="accent-italic">acompaña.</span>
+              </h2>
+              <p class="hero-description">
+                Sesiones individuales sin interrupciones, tecnología diagnóstica de vanguardia y terapias manuales adaptadas a tu propia anatomía.
+              </p>
+              <div class="hero-actions-cluster">
+                <a href="#espacio" class="btn btn-secondary">Conocer el espacio</a>
+              </div>
+            </div>
+
+            <!-- Etapa 3: Cierre del Scroll y CTA (70% - 100%) -->
+            <div class="hero-stage hero-stage-3">
+              <div class="chip">
+                <span class="chip-dot"></span>
+                <span>Da el primer paso</span>
+              </div>
+              <h2 class="hero-title">
+                Tu recuperación comienza en una <span class="accent-italic">suite privada.</span>
+              </h2>
+              <p class="hero-description">
+                Diseñamos un plan terapéutico específico para resolver el origen del dolor y devolverte la libertad de movimiento.
+              </p>
+              <div class="hero-actions-cluster">
+                <a href="#reservar" class="btn btn-primary">
+                  <span>Solicitar cita ahora</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Indicador de Scroll inicial -->
+            <div class="hero-scroll-cue">
+              <div class="scroll-pill-wheel">
+                <div class="scroll-dot-pip"></div>
+              </div>
+              <span class="scroll-cue-text">Deslizar para descubrir</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. BARRA DE CONFIANZA -->
+    <section class="trust-bar" aria-label="Pilares de confianza y calidad">
+      <div class="container">
+        <div class="trust-grid">
+          
+          <div class="trust-item">
+            <div class="trust-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <div class="trust-item-body">
+              <h3>Esterilización certificada</h3>
+              <p>Protocolos hospitalarios rigurosos y materiales de grado médico único garantizados.</p>
+            </div>
+          </div>
+
+          <div class="trust-item">
+            <div class="trust-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </div>
+            <div class="trust-item-body">
+              <h3>Atención 100% individual</h3>
+              <p>Sesiones exclusivas de 50 a 60 minutos sin prisas ni pacientes simultáneos.</p>
+            </div>
+          </div>
+
+          <div class="trust-item">
+            <div class="trust-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+            </div>
+            <div class="trust-item-body">
+              <h3>Colegiados oficiales</h3>
+              <p>Profesionales titulados adscritos al ICOFCV con formación clínica continuada.</p>
+            </div>
+          </div>
+
+          <div class="trust-item">
+            <div class="trust-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+            </div>
+            <div class="trust-item-body">
+              <h3>Espacios privados</h3>
+              <p>Suites individuales con aislamiento acústico, luz natural suave y máxima calma.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. TRATAMIENTOS ESPECIALIZADOS -->
+    <section class="section" id="tratamientos" aria-labelledby="tratamientos-title">
+      <div class="container">
+        
+        <div class="section-header-split">
+          <div class="section-header-left">
+            <div class="chip">
+              <span class="chip-dot"></span>
+              <span>Especialidades Clínicas</span>
+            </div>
+            <h2 id="tratamientos-title" style="margin-top: 12px;">Soluciones terapéuticas diseñadas para tu cuerpo</h2>
+          </div>
+          <p class="section-header-desc">
+            Cada lesión requiere una respuesta biológica precisa. Abordamos la causa subyacente para lograr una recuperación funcional sólida y duradera.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          
+          <!-- Servicio 1 -->
+          <article class="service-card">
+            <div class="service-card-top">
+              <div class="service-icon-box">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"></path><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"></path><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"></path><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"></path></svg>
+              </div>
+              <div class="service-title-row">
+                <h3 class="service-title">Fisioterapia Manual</h3>
+                <span class="service-pill-time">55 min</span>
+              </div>
+              <p class="service-card-desc">
+                Diagnóstico funcional exhaustivo y manipulación articular precisa para descompresión tisular y reequilibrio de la biomecánica corporal natural.
+              </p>
+            </div>
+            <div class="service-card-bottom">
+              <span class="service-subtag">Evaluación articular</span>
+              <a href="#reservar" class="service-link">Consultar cita →</a>
+            </div>
+          </article>
+
+          <!-- Servicio 2 -->
+          <article class="service-card">
+            <div class="service-card-top">
+              <div class="service-icon-box">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 2a2 2 0 0 0-2 2v5H4a2 2 0 0 0-2 2v2c0 1.1.9 2 2 2h5v5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-5h5a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-5V4a2 2 0 0 0-2-2h-2z"></path></svg>
+              </div>
+              <div class="service-title-row">
+                <h3 class="service-title">Rehabilitación Postoperatoria</h3>
+                <span class="service-pill-time">60 min</span>
+              </div>
+              <p class="service-card-desc">
+                Protocolos específicos de readaptación postquirúrgica: ligamentos cruzados, prótesis de cadera y rodilla, e intervenciones de columna.
+              </p>
+            </div>
+            <div class="service-card-bottom">
+              <span class="service-subtag">Readaptación motriz</span>
+              <a href="#reservar" class="service-link">Consultar cita →</a>
+            </div>
+          </article>
+
+          <!-- Servicio 3 -->
+          <article class="service-card">
+            <div class="service-card-top">
+              <div class="service-icon-box">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              </div>
+              <div class="service-title-row">
+                <h3 class="service-title">Lesiones Deportivas</h3>
+                <span class="service-pill-time">50 min</span>
+              </div>
+              <p class="service-card-desc">
+                Recuperación activa y acelerada de roturas fibrilares, esguinces y tendinopatías. Retorno seguro al deporte de impacto sin riesgo de recaída.
+              </p>
+            </div>
+            <div class="service-card-bottom">
+              <span class="service-subtag">Alto rendimiento</span>
+              <a href="#reservar" class="service-link">Consultar cita →</a>
+            </div>
+          </article>
+
+          <!-- Servicio 4 -->
+          <article class="service-card">
+            <div class="service-card-top">
+              <div class="service-icon-box">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
+              </div>
+              <div class="service-title-row">
+                <h3 class="service-title">Terapia Ortopédica</h3>
+                <span class="service-pill-time">55 min</span>
+              </div>
+              <p class="service-card-desc">
+                Técnicas miofasciales profundas, movilización neurodinámica y punción seca precisa para contracturas crónicas y atrapamientos nerviosos.
+              </p>
+            </div>
+            <div class="service-card-bottom">
+              <span class="service-subtag">Biomecánica articular</span>
+              <a href="#reservar" class="service-link">Consultar cita →</a>
+            </div>
+          </article>
+
+          <!-- Servicio 5 -->
+          <article class="service-card">
+            <div class="service-card-top">
+              <div class="service-icon-box">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+              </div>
+              <div class="service-title-row">
+                <h3 class="service-title">Osteopatía Integral</h3>
+                <span class="service-pill-time">60 min</span>
+              </div>
+              <p class="service-card-desc">
+                Enfoque somático holístico estructural, craneal y visceral para restaurar la armonía de fluidos y liberar bloqueos en todo el eje corporal.
+              </p>
+            </div>
+            <div class="service-card-bottom">
+              <span class="service-subtag">Terapia somática</span>
+              <a href="#reservar" class="service-link">Consultar cita →</a>
+            </div>
+          </article>
+
+          <!-- Servicio 6 -->
+          <article class="service-card">
+            <div class="service-card-top">
+              <div class="service-icon-box">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path></svg>
+              </div>
+              <div class="service-title-row">
+                <h3 class="service-title">Dolor de Columna y Cuello</h3>
+                <span class="service-pill-time">55 min</span>
+              </div>
+              <p class="service-card-desc">
+                Tratamiento resolutivo para lumbalgias agudas, ciáticas, protrusiones discales, rectificación cervical y contracturas por estrés postural.
+              </p>
+            </div>
+            <div class="service-card-bottom">
+              <span class="service-subtag">Cuidado espinal</span>
+              <a href="#reservar" class="service-link">Consultar cita →</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. MÉTODO EN 3 PASOS -->
+    <section class="section method-section" id="metodo" aria-labelledby="metodo-title">
+      <div class="container">
+        
+        <div class="section-header-center">
+          <div class="chip">
+            <span class="chip-dot"></span>
+            <span>El Método Fisiomed</span>
+          </div>
+          <h2 id="metodo-title">Un camino riguroso hacia tu recuperación duradera</h2>
+          <p>
+            Combinamos la evidencia fisioterápica internacional más actualizada con un seguimiento individualizado paso a paso.
+          </p>
+        </div>
+
+        <div class="method-timeline-grid">
+          
+          <!-- Paso 01 -->
+          <div class="method-step-card">
+            <div class="step-num-row">
+              <span class="step-big-number">01</span>
+              <div class="step-icon-bubble">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              </div>
+            </div>
+            <h3 class="step-card-title">Valoración Integral</h3>
+            <p class="step-card-desc">
+              Entrevista clínica detallada, test de movilidad articular activa y pasiva, ecografía funcional musculoesquelética y localización exacta del foco lesional.
+            </p>
+            <div class="step-card-footer">
+              <span class="check-icon">✓</span>
+              <span>Diagnóstico diferencial personalizado</span>
+            </div>
+          </div>
+
+          <!-- Paso 02 -->
+          <div class="method-step-card">
+            <div class="step-num-row">
+              <span class="step-big-number">02</span>
+              <div class="step-icon-bubble">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 4.24 4.24"></path><path d="m14.83 9.17 4.24-4.24"></path><path d="m14.83 14.83 4.24 4.24"></path><path d="m9.17 14.83-4.24 4.24"></path></svg>
+              </div>
+            </div>
+            <h3 class="step-card-title">Plan a Medida</h3>
+            <p class="step-card-desc">
+              Fusión individualizada de terapia manual avanzada, diatermia de última generación, liberación miofascial y prescripción de ejercicio correctivo.
+            </p>
+            <div class="step-card-footer">
+              <span class="check-icon">✓</span>
+              <span>Intervención manual en suite privada</span>
+            </div>
+          </div>
+
+          <!-- Paso 03 -->
+          <div class="method-step-card">
+            <div class="step-num-row">
+              <span class="step-big-number">03</span>
+              <div class="step-icon-bubble">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+              </div>
+            </div>
+            <h3 class="step-card-title">Seguimiento y Consolidación</h3>
+            <p class="step-card-desc">
+              Reevaluación continua de rangos articulares, pautas de ergonomía e higiene postural para tu vida diaria y fortalecimiento neuromuscular sin recidivas.
+            </p>
+            <div class="step-card-footer">
+              <span class="check-icon">✓</span>
+              <span>Prevención activa de recaídas</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. ESPACIO E HIGIENE -->
+    <section class="section" id="espacio" aria-labelledby="espacio-title">
+      <div class="container">
+        <div class="space-editorial-grid">
+          
+          <!-- Columna Texto y Bento -->
+          <div class="space-text-col">
+            <div class="chip">
+              <span class="chip-dot"></span>
+              <span>Arquitectura y Calma</span>
+            </div>
+            <h2 id="espacio-title">Un santuario donde la medicina se encuentra con la serenidad</h2>
+            <p>
+              Diseñamos FISIOMED alejándonos deliberadamente de las salas de espera frías y el ruido impersonal de los centros masificados. Aquí, cada suite de tratamiento es un entorno acústicamente tratado, bañado en luz mediterránea suave, con revestimientos de travertino y maderas nobles.
+            </p>
+            <p>
+              El sistema nervioso necesita desconectar para que los tejidos respondan eficazmente al tratamiento. Cada detalle —desde la temperatura ideal hasta la pureza textil de nuestras camillas ergonómicas climatizadas— está concebido para acelerar tu proceso regenerativo.
+            </p>
+
+            <!-- Métricas Bento -->
+            <div class="bento-metrics-strip">
+              <div class="bento-metric-card">
+                <span class="metric-number">100%</span>
+                <span class="metric-label">Suites Privadas</span>
+              </div>
+              <div class="bento-metric-card">
+                <span class="metric-number">4.9★</span>
+                <span class="metric-label">Opinión Google</span>
+              </div>
+              <div class="bento-metric-card">
+                <span class="metric-number">+8</span>
+                <span class="metric-label">Años en Benicarló</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna Galería Fotográfica Real -->
+          <div class="space-media-col">
+            <div class="space-image-frame">
+              <img src="/images/mediterranean-suite.png" alt="Suite de tratamiento privada en FISIOMED con camilla ergonómica y luz mediterránea" loading="lazy">
+              <div class="image-glass-caption">
+                <span>Climatización suave • Renovación de aire continuo</span>
+                <span style="color: var(--color-secondary); font-weight: 700;">SUITE PRIVADA</span>
+              </div>
+            </div>
+
+            <div class="space-inset-card">
+              <div class="trust-icon-box" style="background-color: var(--color-sage-light); color: var(--color-sage-dark);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+              </div>
+              <div>
+                <h4 style="font-size: 1rem; margin-bottom: 4px;">Materiales nobles e hipoalergénicos</h4>
+                <p style="font-size: 0.875rem;">Sábanas de algodón natural 100%, aceites botánicos puros sin químicos sintéticos y desinfección de grado clínico.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. EQUIPO DE FISIOTERAPEUTAS [PENDIENTE DE DATOS OFICIALES] -->
+    <section class="section" id="equipo" style="background-color: var(--color-surface-container-low);" aria-labelledby="equipo-title">
+      <div class="container">
+        
+        <div class="section-header-center">
+          <div class="chip">
+            <span class="chip-dot"></span>
+            <span>Profesionales de Vocación y Rigor</span>
+          </div>
+          <h2 id="equipo-title">Fisioterapeutas Colegiados Oficiales</h2>
+          <p>
+            Adscritos al Ilustre Colegio Oficial de Fisioterapeutas de la Comunitat Valenciana (ICOFCV). Criterio clínico y cercanía humana.
+          </p>
+        </div>
+
+        <div class="team-grid">
+          
+          <!-- Miembro 1 [PENDIENTE] -->
+          <article class="team-card">
+            <div class="team-avatar-box">
+              <img src="/images/interior-corner.png" alt="Rincón clínico de FISIOMED Benicarló" loading="lazy">
+            </div>
+            <div class="team-body">
+              <div class="team-name-row">
+                <h3>Equipo Clínico</h3>
+                <span class="team-badge-pending">[PENDIENTE]</span>
+              </div>
+              <span class="team-role">Dirección Clínica & Terapia Manual</span>
+              <p class="team-desc">
+                [PENDIENTE: Nombre y Nº Colegiado oficial ICOFCV pendientes de confirmación según documentación del cliente].
+              </p>
+            </div>
+          </article>
+
+          <!-- Miembro 2 [PENDIENTE] -->
+          <article class="team-card">
+            <div class="team-avatar-box">
+              <img src="/images/mediterranean-suite.png" alt="Suite privada de fisioterapia en FISIOMED" loading="lazy">
+            </div>
+            <div class="team-body">
+              <div class="team-name-row">
+                <h3>Especialista Columna</h3>
+                <span class="team-badge-pending">[PENDIENTE]</span>
+              </div>
+              <span class="team-role">Columna y Dolor Miofascial</span>
+              <p class="team-desc">
+                [PENDIENTE: Nombre y Nº Colegiado oficial ICOFCV pendientes de confirmación según documentación del cliente].
+              </p>
+            </div>
+          </article>
+
+          <!-- Miembro 3 [PENDIENTE] -->
+          <article class="team-card">
+            <div class="team-avatar-box">
+              <img src="/images/interior-corner.png" alt="Detalle de instalaciones clínicas de FISIOMED" loading="lazy">
+            </div>
+            <div class="team-body">
+              <div class="team-name-row">
+                <h3>Fisioterapia Deportiva</h3>
+                <span class="team-badge-pending">[PENDIENTE]</span>
+              </div>
+              <span class="team-role">Readaptación & Alto Rendimiento</span>
+              <p class="team-desc">
+                [PENDIENTE: Nombre y Nº Colegiado oficial ICOFCV pendientes de confirmación según documentación del cliente].
+              </p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. TESTIMONIOS [PENDIENTE DE RESEÑAS REALES] -->
+    <section class="section" id="testimonios" aria-labelledby="testimonios-title">
+      <div class="container">
+        
+        <div class="testimonial-card-single">
+          <div class="chip" style="margin-bottom: 24px;">
+            <span class="chip-dot"></span>
+            <span>Experiencias de Pacientes</span>
+          </div>
+
+          <div class="stars-row" aria-label="Valoración 5 estrellas">
+            ★ ★ ★ ★ ★
+          </div>
+
+          <blockquote class="quote-editorial">
+            [PENDIENTE: Reseñas reales de pacientes en verificación con la clínica de Benicarló. No se inventan opiniones ficticias para mantener el máximo rigor ético y clínico].
+          </blockquote>
+
+          <div class="quote-author">
+            <span class="author-name">Pacientes Verificados</span>
+            <span class="author-tag">Clínica FISIOMED • Benicarló (Castellón)</span>
+          </div>
+
+          <div style="margin-top: 24px; font-size: 0.8125rem; color: var(--color-text-muted); display: flex; align-items: center; gap: 8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <span>Valoración media 4.9/5 en Google Maps</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 8. BLOQUE FINAL DE CONTACTO Y RESERVA -->
+    <section class="section contact-section" id="reservar" aria-labelledby="contacto-title">
+      <div class="container">
+        
+        <div class="section-header-center">
+          <div class="chip">
+            <span class="chip-dot"></span>
+            <span>Tu Salud en Manos Expertas</span>
+          </div>
+          <h2 id="contacto-title">Tu bienestar merece un espacio a su altura</h2>
+          <p>
+            Solicita tu sesión de valoración clínica o consúltanos cualquier duda sin compromiso.
+          </p>
+        </div>
+
+        <div class="contact-layout-grid">
+          
+          <!-- Formulario de Reserva -->
+          <div class="booking-form-card">
+            <div>
+              <h3 style="margin-bottom: 8px;">Solicitud de Valoración Clínica</h3>
+              <p style="font-size: 0.875rem;">Completa tus datos y nos pondremos en contacto contigo para confirmar día y hora.</p>
+            </div>
+
+            <form id="booking-form" novalidate>
+              <div class="form-grid-row">
+                <div class="form-group">
+                  <label class="form-label" for="form-name">Nombre y Apellidos</label>
+                  <input type="text" id="form-name" class="form-input" placeholder="Ej. Carmen Martínez" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="form-phone">Teléfono de Contacto</label>
+                  <input type="tel" id="form-phone" class="form-input" placeholder="Ej. 600 000 000" required>
+                </div>
+              </div>
+
+              <div class="form-grid-row" style="margin-top: 24px;">
+                <div class="form-group">
+                  <label class="form-label" for="form-treatment">Tratamiento Deseado</label>
+                  <select id="form-treatment" class="form-select">
+                    <option value="valoracion">Primera Valoración General</option>
+                    <option value="manual">Fisioterapia Manual</option>
+                    <option value="espalda">Dolor de Espalda o Cuello</option>
+                    <option value="deportiva">Lesión Deportiva</option>
+                    <option value="postoperatoria">Rehabilitación Postoperatoria</option>
+                    <option value="osteopatia">Osteopatía Integral</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="form-schedule">Horario Preferente</label>
+                  <select id="form-schedule" class="form-select">
+                    <option value="manana">Mañanas (09:00 - 13:00 h)</option>
+                    <option value="tarde">Tardes (15:00 - 20:00 h)</option>
+                    <option value="indiferente">Cualquier franja disponible</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-top: 24px;">
+                <label class="form-label" for="form-notes">Motivo de consulta o dolencia</label>
+                <textarea id="form-notes" class="form-textarea" rows="3" placeholder="Describe brevemente tu dolencia o si tienes pruebas médicas previas..."></textarea>
+              </div>
+
+              <div style="margin-top: 24px;">
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                  <span>Confirmar solicitud de cita</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+              </div>
+
+              <!-- Banner de confirmación -->
+              <div id="booking-success" class="form-success-banner" style="margin-top: 16px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <span>¡Gracias! Hemos recibido tu solicitud. Te llamaremos en breve para confirmar el horario exacto.</span>
+              </div>
+            </form>
+          </div>
+
+          <!-- Canales Directos y Mapa -->
+          <div class="contact-info-col" id="contacto">
+            
+            <div class="contact-card-box">
+              <h3>Atención Inmediata</h3>
+              
+              <div class="direct-channels-list">
+                <!-- Teléfono Fijo -->
+                <a href="tel:964472623" class="channel-link-card">
+                  <div class="channel-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                  </div>
+                  <div class="channel-meta">
+                    <span class="channel-sub">Llamada a consulta</span>
+                    <span class="channel-val">964 47 26 23</span>
+                  </div>
+                </a>
+
+                <!-- WhatsApp Móvil -->
+                <a href="https://wa.me/34601251316" target="_blank" rel="noopener noreferrer" class="channel-link-card">
+                  <div class="channel-icon" style="background-color: #E8F5E9; color: #2E7D32;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                  </div>
+                  <div class="channel-meta">
+                    <span class="channel-sub">WhatsApp Citas Rápidas</span>
+                    <span class="channel-val">601 251 316</span>
+                  </div>
+                </a>
+              </div>
+
+              <div style="border-top: 1px solid var(--color-border-subtle); padding-top: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 0.875rem;">
+                <div style="display: flex; align-items: flex-start; gap: 8px;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                  <span>Carrer d'Alcalà de Xivert, 110, bajo • 12580 Benicarló</span>
+                </div>
+                <div style="display: flex; align-items: flex-start; gap: 8px;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  <span>Lunes a viernes: 09:00–13:00 h y 15:00–20:00 h</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tarjeta de Mapa / Cómo Llegar -->
+            <a href="https://maps.google.com/?q=Carrer+d'Alcala+de+Xivert+110+Benicarlo" target="_blank" rel="noopener noreferrer" class="location-map-card" aria-label="Abrir ubicación en Google Maps">
+              <div class="map-card-badge">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                  <span>Fácil aparcamiento en la zona</span>
+                </div>
+                <span style="color: var(--color-secondary);">Abrir mapa →</span>
+              </div>
+            </a>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 9. FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      
+      <div class="footer-top-grid">
+        <!-- Columna 1: Marca -->
+        <div class="footer-col">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <img src="/images/logo.png" alt="Logo FISIOMED" style="width: 36px; height: 36px; object-fit: contain;">
+            <span style="font-family: var(--font-serif); font-size: 1.5rem; letter-spacing: 0.08em; color: var(--color-primary);">FISIOMED</span>
+          </div>
+          <p style="font-size: 0.9375rem; max-width: 400px; margin-top: 8px;">
+            Más de 8 años cuidando de tu movimiento y bienestar en Benicarló. Fisioterapia avanzada, rehabilitación motora y medicina somática integral frente al Mediterráneo.
+          </p>
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 0.75rem; font-weight: 600; color: var(--color-secondary); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px;">
+            <span>Centro Clínico Autorizado • CS-12493</span>
+          </div>
+        </div>
+
+        <!-- Columna 2: Ubicación y Horario -->
+        <div class="footer-col">
+          <h4>Ubicación y Horario</h4>
+          <div class="footer-info-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span>Carrer d'Alcalà de Xivert, 110, bajo<br>12580 Benicarló, Castellón</span>
+          </div>
+          <div class="footer-info-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <span>Lunes a viernes:<br>09:00 – 13:00 h • 15:00 – 20:00 h</span>
+          </div>
+        </div>
+
+        <!-- Columna 3: Atención y Citas -->
+        <div class="footer-col">
+          <h4>Atención y Citas</h4>
+          <div class="footer-info-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <a href="tel:964472623">964 47 26 23</a>
+          </div>
+          <div class="footer-info-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+            <a href="https://wa.me/34601251316" target="_blank" rel="noopener noreferrer">601 251 316 (WhatsApp)</a>
+          </div>
+          <div class="footer-info-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            <a href="https://instagram.com/fisiomed_blo" target="_blank" rel="noopener noreferrer">@fisiomed_blo</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Barra Inferior Legal -->
+      <div class="footer-bottom-bar">
+        <span>© 2026 FISIOMED Benicarló. Todos los derechos reservados.</span>
+        <div class="legal-links-cluster">
+          <a href="#">Aviso Legal</a>
+          <span>•</span>
+          <a href="#">Política de Privacidad</a>
+          <span>•</span>
+          <a href="#">Consentimiento Informado</a>
+          <span>•</span>
+          <a href="#">Registro Sanitario</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Widget Flotante de WhatsApp -->
+  <aside>
+    <a href="https://wa.me/34601251316" target="_blank" rel="noopener noreferrer" class="floating-whatsapp-widget" aria-label="Abrir chat de WhatsApp para citas rápidas">
+      <span class="pulse-indicator-dot"></span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+      <span>WhatsApp Citas</span>
+    </a>
+  </aside>
+
+  <!-- Script Principal de la Aplicación -->
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

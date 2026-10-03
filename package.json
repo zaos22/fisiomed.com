@@ -1,0 +1,30 @@
+{
+  "name": "fisiomed.com",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zaos22/fisiomed.com.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/zaos22/fisiomed.com/issues"
+  },
+  "homepage": "https://github.com/zaos22/fisiomed.com#readme",
+  "devDependencies": {
+    "vite": "^8.3.2"
+  },
+  "dependencies": {
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.26"
+  }
+}
