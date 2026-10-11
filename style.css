@@ -200,6 +200,13 @@ button {
   padding-right: var(--space-24);
 }
 
+@media (max-width: 479px) {
+  .container {
+    padding-left: var(--space-16);
+    padding-right: var(--space-16);
+  }
+}
+
 @media (min-width: 768px) {
   .container {
     padding-left: var(--space-48);
@@ -218,6 +225,13 @@ button {
   padding-top: var(--space-80);
   padding-bottom: var(--space-80);
   position: relative;
+}
+
+@media (max-width: 479px) {
+  .section {
+    padding-top: var(--space-56);
+    padding-bottom: var(--space-56);
+  }
 }
 
 @media (min-width: 768px) {
@@ -591,13 +605,15 @@ button {
   z-index: 1050;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  gap: var(--space-32);
-  padding: var(--space-48) var(--space-24);
+  gap: var(--space-24);
+  padding: calc(var(--header-height) + var(--space-24)) var(--space-24) var(--space-40);
   transform: translateY(-100%);
   opacity: 0;
   visibility: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, visibility 0.5s;
 }
 
@@ -609,10 +625,11 @@ button {
 
 .mobile-nav-link {
   font-family: var(--font-serif);
-  font-size: 1.75rem;
+  font-size: clamp(1.35rem, 5vw, 1.75rem);
   color: var(--color-primary);
   letter-spacing: 0.04em;
   transition: color var(--transition-fast);
+  padding: var(--space-8) 0;
 }
 
 .mobile-nav-link:hover {
@@ -756,6 +773,17 @@ button {
   padding-top: var(--space-8);
 }
 
+@media (max-width: 479px) {
+  .hero-actions-cluster {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  .hero-actions-cluster .btn {
+    width: 100%;
+  }
+}
+
 .hero-credentials-pill {
   display: flex;
   align-items: center;
@@ -763,6 +791,7 @@ button {
   padding-top: var(--space-16);
   color: var(--color-text-muted);
   font-size: 0.8125rem;
+  line-height: 1.4;
 }
 
 .credentials-icon {
@@ -984,23 +1013,46 @@ button {
 
 .service-title-row {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: var(--space-8);
+  gap: var(--space-12);
 }
 
 .service-title {
   font-size: 1.35rem;
+  flex: 1;
 }
 
 .service-pill-time {
-  padding: 4px 10px;
-  border-radius: var(--radius-full);
-  background-color: var(--color-secondary-fixed);
-  color: var(--color-on-secondary-container);
-  font-size: 0.6875rem;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-width: 44px;
+  padding: 6px 10px;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface-container);
+  border: 1px solid var(--color-gold-hairline);
+  color: var(--color-primary);
+  line-height: 1.1;
+  text-align: center;
+}
+
+.service-pill-time .time-val {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.service-pill-time .time-unit {
+  font-size: 0.625rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-on-surface-variant);
+  margin-top: 2px;
 }
 
 .service-card-desc {
@@ -1591,6 +1643,12 @@ button {
   padding-top: var(--space-8);
 }
 
+@media (max-width: 479px) {
+  .bento-metrics-strip {
+    gap: var(--space-8);
+  }
+}
+
 .bento-metric-card {
   padding: var(--space-24) var(--space-16);
   border-radius: var(--radius-lg);
@@ -1599,6 +1657,19 @@ button {
   display: flex;
   flex-direction: column;
   text-align: center;
+}
+
+@media (max-width: 479px) {
+  .bento-metric-card {
+    padding: var(--space-16) var(--space-8);
+  }
+  .metric-number {
+    font-size: 1.5rem;
+  }
+  .metric-label {
+    font-size: 0.625rem;
+    letter-spacing: 0.04em;
+  }
 }
 
 .metric-number {
@@ -1847,6 +1918,13 @@ button {
   gap: var(--space-32);
 }
 
+@media (max-width: 479px) {
+  .booking-form-card {
+    padding: var(--space-24) var(--space-16);
+    gap: var(--space-24);
+  }
+}
+
 .form-grid-row {
   display: grid;
   grid-template-columns: 1fr;
@@ -1917,6 +1995,12 @@ button {
   display: flex;
   flex-direction: column;
   gap: var(--space-24);
+}
+
+@media (max-width: 479px) {
+  .contact-card-box {
+    padding: var(--space-24) var(--space-16);
+  }
 }
 
 .direct-channels-list {
@@ -2087,7 +2171,6 @@ button {
   color: var(--color-primary);
 }
 
-/* Botón flotante de WhatsApp */
 .floating-whatsapp-widget {
   position: fixed;
   bottom: calc(var(--space-24) + env(safe-area-inset-bottom, 0px));
@@ -2109,6 +2192,15 @@ button {
   text-transform: uppercase;
   color: var(--color-primary);
   transition: all var(--transition-base);
+}
+
+@media (max-width: 479px) {
+  .floating-whatsapp-widget {
+    bottom: calc(var(--space-16) + env(safe-area-inset-bottom, 0px));
+    right: var(--space-16);
+    padding: var(--space-8) var(--space-12);
+    font-size: 0.6875rem;
+  }
 }
 
 .floating-whatsapp-widget:hover {
