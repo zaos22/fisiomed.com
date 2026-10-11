@@ -23,6 +23,7 @@ export class MethodController {
 
     this.canvas = document.getElementById(options.canvasId || 'method-canvas');
     this.badgeEl = document.getElementById('method-sticky-badge');
+    this.progressRail = document.querySelector('.method-progress-rail');
     this.progressFill = document.getElementById('method-progress-fill');
     this.stepNodes = Array.from(document.querySelectorAll('.method-progress-node'));
     this.stepBlocks = Array.from(document.querySelectorAll('.method-step-block'));
@@ -32,8 +33,8 @@ export class MethodController {
       totalFrames: 50,
       framePattern: (i) => `/our_method/ezgif-frame-${String(i + 1).padStart(3, '0')}.png`,
       scrollHeightDesktop: '300vh',
-      scrollHeightTablet: '260vh',
-      scrollHeightMobile: '220vh',
+      scrollHeightTablet: '200vh',
+      scrollHeightMobile: '175vh',
       scrubSmoothing: 0.7,
       // Puntos de corte para las 3 fases (normalizados 0 a 1)
       phases: [
@@ -188,6 +189,18 @@ export class MethodController {
             this.progressFill.style.height = `${Math.min(progress * 100, 100)}%`;
           }
 
+          // Desvanecer el riel suavemente en el tramo final en móvil para evitar cortes con la siguiente sección
+          if (this.progressRail && window.innerWidth < 768) {
+            if (progress > 0.94) {
+              const fadeRatio = Math.max(0, 1 - (progress - 0.94) / 0.05);
+              this.progressRail.style.opacity = String(fadeRatio);
+            } else {
+              this.progressRail.style.opacity = '1';
+            }
+          } else if (this.progressRail) {
+            this.progressRail.style.opacity = '1';
+          }
+
           // 3. Determinar fase activa (0, 1 o 2) o -1 si ya pasó
           let activePhaseIdx = -1;
           if (progress >= 0.0 && progress < 0.33) {
@@ -201,7 +214,37 @@ export class MethodController {
           if (activePhaseIdx !== this.currentPhaseIndex) {
             this.setActivePhase(activePhaseIdx);
           }
+
+          // En pantallas móviles donde el video es sticky superior,
+          // verificar la posición real de cada bloque para que NO se desactive
+          // hasta que realmente llegue a la base del video
+          if (window.innerWidth < 1024) {
+            this.updateMobileBlocksVisibility();
+          }
         }
+      }
+    });
+  }
+
+  updateMobileBlocksVisibility() {
+    const videoBottom = window.innerHeight * 0.44 + (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 72);
+
+    this.stepBlocks.forEach((block, i) => {
+      const rect = block.getBoundingClientRect();
+      // Si el bloque aún está por debajo del video o justo llegando, se mantiene 100% activo y legible
+      // Solo si su parte superior ya subió por detrás/debajo del video (rect.bottom < videoBottom + 80), se atenúa
+      if (rect.top > videoBottom - 40) {
+        // Aún visible en la zona inferior de lectura antes de meterse bajo el video
+        block.classList.add('is-active');
+        block.classList.remove('is-dimmed');
+      } else if (rect.bottom < videoBottom + 60) {
+        // Ya ha pasado por debajo del video
+        block.classList.remove('is-active');
+        block.classList.add('is-dimmed');
+      } else {
+        // En transición de entrada bajo el video
+        block.classList.add('is-active');
+        block.classList.remove('is-dimmed');
       }
     });
   }
@@ -235,16 +278,18 @@ export class MethodController {
       }
     });
 
-    // Actualizar bloques de texto (fase activa 100% y escala ligera, inactivas 35%)
-    this.stepBlocks.forEach((block, i) => {
-      if (i === index) {
-        block.classList.add('is-active');
-        block.classList.remove('is-dimmed');
-      } else {
-        block.classList.remove('is-active');
-        block.classList.add('is-dimmed');
-      }
-    });
+    // En pantallas grandes (desktop), la fase activa marca el bloque activo vs dim
+    if (window.innerWidth >= 1024) {
+      this.stepBlocks.forEach((block, i) => {
+        if (i === index) {
+          block.classList.add('is-active');
+          block.classList.remove('is-dimmed');
+        } else {
+          block.classList.remove('is-active');
+          block.classList.add('is-dimmed');
+        }
+      });
+    }
   }
 
   setupNodeClicks() {

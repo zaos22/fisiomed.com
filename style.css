@@ -1088,6 +1088,8 @@ button {
 .method-section {
   background-color: var(--color-surface-container-low);
   position: relative;
+  z-index: 1;
+  overflow: clip;
 }
 
 .section-header-center {
@@ -1110,8 +1112,8 @@ button {
   position: relative;
   /* ▼ AJUSTE PRINCIPAL: recorrido de scroll disponible */
   --method-scroll-height: 300vh;
-  --method-scroll-height-tablet: 260vh;
-  --method-scroll-height-mobile: 220vh;
+  --method-scroll-height-tablet: 200vh;
+  --method-scroll-height-mobile: 175vh;
   min-height: var(--method-scroll-height);
   height: var(--method-scroll-height);
 }
@@ -1165,14 +1167,13 @@ button {
   }
 }
 
-/* En móvil, la columna sticky debe ocupar el alto total para que el visor sea sticky,
-   mientras el texto fluye por encima. */
 .method-sticky-col {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 20;
   pointer-events: none;
 }
 .method-sticky-col * {
@@ -1187,14 +1188,7 @@ button {
     flex-shrink: 0;
     align-self: stretch;
     padding-right: var(--space-48);
-  }
-}
-
-@media (min-width: 1024px) {
-  .method-sticky-col {
-    width: 52%;
-    flex-shrink: 0;
-    padding-right: var(--space-48);
+    z-index: 5;
   }
 }
 
@@ -1332,13 +1326,15 @@ button {
   position: relative;
   z-index: 5;
   gap: var(--space-16);
-  padding-top: calc(48dvh + var(--header-height));
+  padding-top: calc(44dvh + var(--header-height) + 12px);
+  padding-bottom: clamp(64px, 12vh, 96px);
 }
 
 @media (min-width: 1024px) {
   .method-content-col {
     gap: var(--space-24);
     padding-top: 0;
+    padding-bottom: 0;
   }
 }
 
@@ -1358,13 +1354,14 @@ button {
   justify-content: space-between;
   z-index: 15;
   align-self: flex-start;
+  transition: opacity 0.3s ease;
 }
 
 @media (max-width: 767px) {
   .method-progress-rail {
     width: 44px;
-    height: calc(100svh - var(--header-height) - 48dvh - 48px);
-    max-height: 200px;
+    height: 168px;
+    max-height: 168px;
     top: calc(var(--header-height) + 44dvh + 12px);
   }
 }
@@ -1454,9 +1451,9 @@ button {
   gap: 0;
 }
 
-/* ── Bloque de Fase: cada uno ocupa ~80-100vh para un scroll rítmico ── */
+/* ── Bloque de Fase: scroll rítmico compacto ── */
 .method-step-block {
-  min-height: 85vh;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1468,7 +1465,7 @@ button {
 
 @media (max-width: 767px) {
   .method-step-block {
-    min-height: 60vh;
+    min-height: auto;
     padding: var(--space-8) 0;
   }
 }
@@ -1510,6 +1507,16 @@ button {
 .method-step-block.is-dimmed {
   opacity: 0.35;
   transform: scale(0.98) translateX(0px);
+}
+
+@media (max-width: 767px) {
+  .method-step-block.is-active {
+    transform: none;
+  }
+  .method-step-block.is-dimmed {
+    opacity: 0.45;
+    transform: none;
+  }
 }
 
 /* Imagen representativa para fallback de prefers-reduced-motion (oculta por defecto) */
@@ -1607,6 +1614,12 @@ button {
 /* ==========================================================================
    5. ESPACIO E HIGIENE
    ========================================================================== */
+#espacio {
+  position: relative;
+  z-index: 25;
+  background-color: var(--color-surface);
+}
+
 .space-editorial-grid {
   display: grid;
   grid-template-columns: 1fr;

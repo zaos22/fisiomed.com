@@ -39,8 +39,8 @@ class FisiomedApp {
       sectionId: 'metodo',
       canvasId: 'method-canvas',
       scrollHeightDesktop: '300vh',
-      scrollHeightTablet: '260vh',
-      scrollHeightMobile: '220vh',
+      scrollHeightTablet: '200vh',
+      scrollHeightMobile: '175vh',
       scrubSmoothing: 0.7
     });
 
