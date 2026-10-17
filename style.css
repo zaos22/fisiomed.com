@@ -104,6 +104,7 @@
   /* ── Layout y Componentes (sin cambio) ── */
   --header-height: 80px;
   --space-10:      10px;
+  --space-12:      12px;
   --space-20:      20px;
   --space-28:      28px;
   --space-36:      36px;
@@ -130,13 +131,32 @@ html {
   color: var(--color-on-surface);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Prevenir cualquier desplazamiento o arrastre horizontal */
+  overflow-x: clip;
+  max-width: 100%;
+  /* Ocultar barra de scroll en navegadores modernos */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Ocultar barra de desplazamiento en motores WebKit (Chrome, Safari, Edge, Opera, móviles) */
+::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+html, body, main {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
 }
 
 body {
   background-color: var(--color-surface);
   color: var(--color-on-surface);
-  /* clip no crea un scroll container (a diferencia de hidden), preservando position:sticky */
+  /* clip no crea un scroll container secundario, preservando position:sticky y GSAP ScrollTrigger */
   overflow-x: clip;
+  max-width: 100%;
   line-height: 1.6;
   min-height: 100vh;
   position: relative;
@@ -221,10 +241,15 @@ button {
   }
 }
 
+main {
+  overflow-x: clip;
+}
+
 .section {
   padding-top: var(--space-80);
   padding-bottom: var(--space-80);
   position: relative;
+  overflow-x: clip;
 }
 
 @media (max-width: 479px) {
@@ -395,9 +420,15 @@ button {
   left: 0;
   right: 0;
   z-index: 1100;
-  height: 80px;
+  height: var(--header-height);
   transition: background-color var(--transition-base), box-shadow var(--transition-base), backdrop-filter var(--transition-base), border-color var(--transition-base);
   border-bottom: 1px solid transparent;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --header-height: 64px;
+  }
 }
 
 .site-header.scrolled {
@@ -413,20 +444,39 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-16);
+  gap: var(--space-8);
+}
+
+@media (min-width: 480px) {
+  .header-container {
+    gap: var(--space-16);
+  }
 }
 
 .brand-link {
   display: flex;
   align-items: center;
-  gap: var(--space-16);
+  gap: var(--space-8);
+}
+
+@media (min-width: 480px) {
+  .brand-link {
+    gap: var(--space-16);
+  }
 }
 
 .brand-logo-img {
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
   object-fit: contain;
   border-radius: var(--radius-sm);
+}
+
+@media (min-width: 480px) {
+  .brand-logo-img {
+    width: 44px;
+    height: 44px;
+  }
 }
 
 .brand-meta {
@@ -436,7 +486,7 @@ button {
 
 .brand-name {
   font-family: var(--font-serif);
-  font-size: 1.35rem;
+  font-size: clamp(1.15rem, 4vw, 1.35rem);
   letter-spacing: 0.06em;
   color: var(--color-primary);
   display: flex;
@@ -720,37 +770,95 @@ button {
 }
 
 /* Mensajes secuenciales dentro del Hero */
+/* Mensajes secuenciales dentro del Hero */
 .hero-stage {
+  width: 100%;
   max-width: 680px;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: var(--space-24);
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding-left: var(--space-24);
+  padding-right: var(--space-24);
   will-change: opacity, transform;
+}
+
+@media (max-width: 767px) {
+  .hero-stage {
+    /* Desplaza el centro vertical ligeramente para compensar el header fijo */
+    top: calc(50% + 20px);
+    gap: var(--space-16);
+    padding-left: var(--space-16);
+    padding-right: var(--space-16);
+  }
+}
+
+@media (max-width: 479px) {
+  .hero-stage {
+    padding-left: var(--space-16);
+    padding-right: var(--space-16);
+    gap: var(--space-16);
+  }
+}
+
+@media (max-height: 680px) and (max-width: 767px) {
+  .hero-stage {
+    top: calc(50% + 16px);
+    gap: var(--space-8);
+  }
+  .hero-stage .hero-description {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+  .hero-credentials-pill {
+    display: none;
+  }
+}
+
+.hero-stage .chip {
+  align-self: flex-start;
+  width: auto;
+  max-width: 100%;
+  white-space: nowrap;
+  padding: 8px var(--space-16);
+  border-radius: var(--radius-full);
+}
+
+@media (max-width: 479px) {
+  .hero-stage .chip {
+    font-size: clamp(0.65rem, 2.8vw, 0.725rem);
+    padding: 6px var(--space-16);
+    letter-spacing: 0.08em;
+    border-radius: var(--radius-full);
+  }
 }
 
 .hero-stage-1 {
   opacity: 1;
-  transform: translateY(-50%);
+  transform: translate(-50%, -50%);
 }
 
 .hero-stage-2 {
   opacity: 0;
-  transform: translateY(calc(-50% + 20px));
+  transform: translate(-50%, calc(-50% + 20px));
   pointer-events: none;
 }
 
 .hero-stage-3 {
   opacity: 0;
-  transform: translateY(calc(-50% + 20px));
+  transform: translate(-50%, calc(-50% + 20px));
   pointer-events: none;
 }
 
 .hero-title {
   color: var(--color-primary);
   font-weight: 400;
+  word-break: break-word;
+  width: 100%;
 }
 
 .hero-title .accent-italic {
@@ -763,6 +871,7 @@ button {
   line-height: 1.7;
   color: var(--color-on-surface-variant);
   max-width: 560px;
+  width: 100%;
 }
 
 .hero-actions-cluster {
@@ -771,16 +880,20 @@ button {
   align-items: center;
   gap: var(--space-16);
   padding-top: var(--space-8);
+  width: 100%;
 }
 
-@media (max-width: 479px) {
+@media (max-width: 767px) {
   .hero-actions-cluster {
     flex-direction: column;
     align-items: stretch;
     width: 100%;
+    gap: var(--space-12);
   }
   .hero-actions-cluster .btn {
     width: 100%;
+    min-height: 48px;
+    padding: var(--space-16) var(--space-24);
   }
 }
 
@@ -810,7 +923,7 @@ button {
 /* Indicador de Scroll */
 .hero-scroll-cue {
   position: absolute;
-  bottom: var(--space-40);
+  bottom: var(--space-32);
   left: 0;
   display: flex;
   align-items: center;
@@ -818,6 +931,12 @@ button {
   color: var(--color-text-muted);
   transition: opacity var(--transition-base);
   z-index: 4;
+}
+
+@media (max-height: 720px) {
+  .hero-scroll-cue {
+    display: none;
+  }
 }
 
 .scroll-pill-wheel {
@@ -2211,8 +2330,10 @@ button {
   .floating-whatsapp-widget {
     bottom: calc(var(--space-16) + env(safe-area-inset-bottom, 0px));
     right: var(--space-16);
-    padding: var(--space-8) var(--space-12);
+    padding: var(--space-8) var(--space-16);
     font-size: 0.6875rem;
+    white-space: nowrap;
+    border-radius: var(--radius-full);
   }
 }
 
@@ -2292,11 +2413,19 @@ button {
 }
 
 [data-animate="fade-left"] {
-  transform: translateX(30px);
+  transform: translateX(20px);
 }
 
 [data-animate="fade-right"] {
-  transform: translateX(-30px);
+  transform: translateX(-20px);
+}
+
+@media (max-width: 767px) {
+  /* En móviles, transformar lateralmente puede desbordar o cortar textos; usamos fade-up */
+  [data-animate="fade-left"],
+  [data-animate="fade-right"] {
+    transform: translateY(20px);
+  }
 }
 
 /* Estado activo cuando entran en el viewport */
