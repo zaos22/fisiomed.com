@@ -222,8 +222,8 @@ button {
 
 @media (max-width: 479px) {
   .container {
-    padding-left: var(--space-16);
-    padding-right: var(--space-16);
+    padding-left: var(--space-20);
+    padding-right: var(--space-20);
   }
 }
 
@@ -748,7 +748,6 @@ main {
   }
 }
 
-/* Capa de contenidos de texto del Hero */
 .hero-content-layer {
   position: relative;
   z-index: 3;
@@ -764,9 +763,21 @@ main {
   position: relative;
   width: 100%;
   height: 100%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-24);
+  padding-right: var(--space-24);
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+@media (max-width: 479px) {
+  .hero-content-layer .container {
+    padding-left: var(--space-24);
+    padding-right: var(--space-24);
+  }
 }
 
 /* Mensajes secuenciales dentro del Hero */
@@ -780,21 +791,23 @@ main {
   position: absolute;
   top: 50%;
   left: var(--space-24);
+  right: var(--space-24);
   transform: translateY(-50%);
-  padding-left: 0;
-  padding-right: var(--space-24);
+  padding: 0;
   will-change: opacity, transform;
 }
 
 @media (min-width: 768px) {
   .hero-stage {
     left: var(--space-48);
+    right: auto;
   }
 }
 
 @media (min-width: 1200px) {
   .hero-stage {
     left: var(--space-64);
+    right: auto;
     max-width: 880px;
     gap: var(--space-32);
   }
@@ -802,29 +815,30 @@ main {
 
 @media (max-width: 767px) {
   .hero-stage {
-    max-width: 680px;
-    left: 50%;
-    /* Desplaza el centro vertical ligeramente para compensar el header fijo */
-    top: calc(50% + 20px);
-    transform: translate(-50%, -50%);
+    max-width: calc(100% - (var(--space-24) * 2));
+    left: var(--space-24);
+    right: var(--space-24);
+    margin: 0 auto;
+    top: 50%;
+    transform: translateY(-50%);
     gap: var(--space-16);
-    padding-left: var(--space-16);
-    padding-right: var(--space-16);
+    padding: 0;
   }
 }
 
 @media (max-width: 479px) {
   .hero-stage {
-    padding-left: var(--space-16);
-    padding-right: var(--space-16);
+    max-width: calc(100% - 48px);
+    left: 24px;
+    right: 24px;
     gap: var(--space-16);
   }
 }
 
-@media (max-height: 680px) and (max-width: 767px) {
+@media (max-height: 740px) and (max-width: 767px) {
   .hero-stage {
-    top: calc(50% + 16px);
-    gap: var(--space-8);
+    top: 50%;
+    gap: var(--space-10);
   }
   .hero-stage .hero-description {
     font-size: 0.875rem;
@@ -874,14 +888,21 @@ main {
   width: 100%;
 }
 
+@media (max-width: 479px) {
+  .hero-title {
+    font-size: clamp(1.85rem, 6.5vw, 2.25rem);
+    line-height: 1.2;
+  }
+}
+
 .hero-title .accent-italic {
   font-style: italic;
   color: var(--color-secondary);
 }
 
 .hero-description {
-  font-size: clamp(1rem, 1.2vw + 0.5rem, 1.2rem);
-  line-height: 1.7;
+  font-size: clamp(0.95rem, 1.2vw + 0.5rem, 1.2rem);
+  line-height: 1.65;
   color: var(--color-on-surface-variant);
   max-width: 640px;
   width: 100%;
@@ -898,6 +919,8 @@ main {
 @media (max-width: 767px) {
   .hero-description {
     max-width: 560px;
+    font-size: 0.95rem;
+    line-height: 1.6;
   }
 }
 
@@ -916,11 +939,12 @@ main {
     align-items: stretch;
     width: 100%;
     gap: var(--space-12);
+    padding-top: 0;
   }
   .hero-actions-cluster .btn {
     width: 100%;
-    min-height: 48px;
-    padding: var(--space-16) var(--space-24);
+    min-height: 46px;
+    padding: var(--space-12) var(--space-20);
   }
 }
 
@@ -928,7 +952,7 @@ main {
   display: flex;
   align-items: center;
   gap: var(--space-16);
-  padding-top: var(--space-16);
+  padding-top: var(--space-12);
   color: var(--color-text-muted);
   font-size: 0.8125rem;
   line-height: 1.4;
@@ -951,13 +975,32 @@ main {
 .hero-scroll-cue {
   position: absolute;
   bottom: var(--space-32);
-  left: 0;
+  left: var(--space-24);
   display: flex;
   align-items: center;
   gap: var(--space-16);
   color: var(--color-text-muted);
   transition: opacity var(--transition-base);
   z-index: 4;
+}
+
+@media (min-width: 768px) {
+  .hero-scroll-cue {
+    left: var(--space-48);
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero-scroll-cue {
+    left: var(--space-64);
+  }
+}
+
+@media (max-width: 479px) {
+  .hero-scroll-cue {
+    left: var(--space-24);
+    bottom: var(--space-24);
+  }
 }
 
 @media (max-height: 720px) {

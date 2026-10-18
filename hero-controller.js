@@ -72,6 +72,7 @@ export class HeroCanvasController {
   }
 
   setupResizeHandler() {
+    let resizeTimer;
     const resizeCanvas = () => {
       if (!this.canvas) return;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -85,6 +86,11 @@ export class HeroCanvasController {
         this.renderedFrameIndex = -1;
         this.drawCurrentFrame();
       }
+
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 150);
     };
 
     window.addEventListener('resize', resizeCanvas, { passive: true });
